@@ -14,20 +14,20 @@ import org.newdawn.slick.geom.Shape;
  *
  * @author jparker3221
  */
-public class Ninja {
+public class Candy {
     public int x;
 	public int y;
 	public boolean isvisible = true;
 	Image currentImage;
 	Shape hitbox;
-	Image ninja = new Image(
+	Image candy = new Image(
 			"res/Candy.png");
 
-	Ninja(int a, int b) throws SlickException {
+	Candy(int a, int b) throws SlickException {
 		this.x = a;
 		this.y = b;
 		this.hitbox = new Rectangle(a, b, 32, 32);// 64 is the width of the item
-		this.currentImage = ninja;
+		this.currentImage = candy;
 
 	}
 }

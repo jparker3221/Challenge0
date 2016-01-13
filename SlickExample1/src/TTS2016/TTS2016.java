@@ -106,13 +106,13 @@ class Itemwin {
 
 }
 
-public class Unwavering extends BasicGameState {
+public class TTS2016 extends BasicGameState {
 
     public Item healthpotion, healthpotion1;
     public Item1 speedpotion, speedpotion1;
     public Itemwin antidote;
-    public Ninja stormy, daniel;
-    public Shoes sonic, knuckles;
+    public Candy candy1, candy2;
+    public Soda soda1, soda2;
     public Enemy flava, flav;
 
     public ArrayList<Item> stuff = new ArrayList();
@@ -121,9 +121,9 @@ public class Unwavering extends BasicGameState {
 
     public ArrayList<Itemwin> stuffwin = new ArrayList();
 
-    public ArrayList<Ninja> dojo = new ArrayList();
+    public ArrayList<Candy> Candyshop = new ArrayList();
 
-    public ArrayList<Shoes> sneaks = new ArrayList();
+    public ArrayList<Soda> Sodashop = new ArrayList();
 
     public ArrayList<Enemy> bonez = new ArrayList();
 
@@ -154,7 +154,7 @@ public class Unwavering extends BasicGameState {
 
     private static final int SCREEN_HEIGHT = 750;
 
-    public Unwavering(int xSize, int ySize) {
+    public TTS2016(int xSize, int ySize) {
 
     }
 
@@ -368,20 +368,20 @@ public class Unwavering extends BasicGameState {
 
         healthpotion = new Item(100, 100);
         healthpotion1 = new Item(450, 400);
-        stormy = new Ninja(800, 500);
-        daniel = new Ninja(204, 750);
+        candy1 = new Candy(800, 500);
+        candy2 = new Candy(204, 750);
         stuff.add(healthpotion);
         stuff.add(healthpotion1);
-        dojo.add(stormy);
-        dojo.add(daniel);
+        Candyshop.add(candy1);
+        Candyshop.add(candy2);
         speedpotion = new Item1(100, 150);
         speedpotion1 = new Item1(450, 100);
         stuff1.add(speedpotion);
         stuff1.add(speedpotion1);
-        sonic = new Shoes(1000, 400);
-        knuckles = new Shoes(900, 325);
-        sneaks.add(sonic);
-        sneaks.add(knuckles);
+        soda1 = new Soda(1000, 400);
+        soda2 = new Soda(900, 325);
+        Sodashop.add(soda1);
+        Sodashop.add(soda2);
         flava = new Enemy(3000, 1280);
         flav = new Enemy(1864, 256);
         bonez.add(flava);
@@ -441,7 +441,7 @@ public class Unwavering extends BasicGameState {
 
             }
         }
-        for (Ninja n : dojo) {
+        for (Candy n : Candyshop) {
             if (n.isvisible) {
                 n.currentImage.draw(n.x, n.y);
                 // draw the hitbox
@@ -449,7 +449,7 @@ public class Unwavering extends BasicGameState {
 
             }
         }
-        for (Shoes s : sneaks) {
+        for (Soda s : Sodashop) {
             if (s.isvisible) {
                 s.currentImage.draw(s.x, s.y);
                 // draw the hitbox
@@ -563,7 +563,7 @@ public class Unwavering extends BasicGameState {
 
             }
         }
-        for (Ninja n : dojo) {
+        for (Candy n : Candyshop) {
 
             if (Player.rect.intersects(n.hitbox)) {
                 //System.out.println("yay");
@@ -615,13 +615,13 @@ public class Unwavering extends BasicGameState {
             }
         }
         
-        for (Shoes s : sneaks) {
+        for (Soda s : Sodashop) {
 
             if (Player.rect.intersects(s.hitbox)) {
                 //System.out.println("yay");
                 if (s.isvisible) {
 
-                    Player.speed += .5f;
+                    Player.speed += .2f;
                     s.isvisible = false;
                 }
 
