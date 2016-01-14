@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.newdawn.slick.Animation;
+
 import org.newdawn.slick.Color;
 
 import org.newdawn.slick.AppGameContainer;
