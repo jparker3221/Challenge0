@@ -20,7 +20,8 @@ public class Soda {
     public boolean isvisible = true;
     Image currentImage;
     Shape hitbox;
-    Image soda = new Image("res/Soda.png");
+    Image soda = new Image(
+            "res/candy.png");
 
     Soda(int a, int b) throws SlickException {
         this.x = a;
