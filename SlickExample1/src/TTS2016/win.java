@@ -92,7 +92,7 @@ public class win extends BasicGameState {
         g.setColor(Color.white);
 
 
-        g.drawString("You found the antidote in time!", 380, 200);
+        g.drawString("You destroyed the house!", 380, 200);
         g.drawString("press 1 to play again", 400, 320);
 
 
@@ -151,11 +151,13 @@ public class win extends BasicGameState {
                 TTS2016.counter = 0;
                 Player.x = 96f;
                 Player.y = 228f;
+                Player.counter = 0;
                 
                 
                 //item.isvisible = true;
                 //item1.isvisible = true;
                 Itemwin.isvisible = true;
+                //Destroyable1.isvisible = true;
                 game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 
 

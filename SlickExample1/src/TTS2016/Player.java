@@ -22,6 +22,8 @@ public class Player {
 	public static int health = 100000;
 	
 	public static float speed = .4f;
+        
+        public static int counter = 0;
 
 	static float hitboxX = x + 8f;
 

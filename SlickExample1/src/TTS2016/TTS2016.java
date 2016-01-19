@@ -115,6 +115,8 @@ public class TTS2016 extends BasicGameState {
     public Candy candy1, candy2;
     public Soda soda1, soda2;
     public Enemy flava, flav;
+    public Destroyable1 destroyable1a, destroyable1b, destroyable1c,
+            destroyable1d, destroyable1e;
 
     public ArrayList<Item> stuff = new ArrayList();
 
@@ -127,6 +129,8 @@ public class TTS2016 extends BasicGameState {
     public ArrayList<Soda> Sodashop = new ArrayList();
 
     public ArrayList<Enemy> bonez = new ArrayList();
+    
+    public ArrayList<Destroyable1> desks = new ArrayList();
 
     private boolean[][] hostiles;
 
@@ -389,6 +393,16 @@ public class TTS2016 extends BasicGameState {
         bonez.add(flav);
         antidote = new Itemwin(3004, 92);
         stuffwin.add(antidote);
+        destroyable1a = new Destroyable1(256,256);
+        destroyable1b = new Destroyable1(256,128);
+        destroyable1c = new Destroyable1(128,256);
+        destroyable1d = new Destroyable1(64,64);
+        destroyable1e = new Destroyable1(1028,256);
+        desks.add(destroyable1a);
+        desks.add(destroyable1b);
+        desks.add(destroyable1c);
+        desks.add(destroyable1d);
+        desks.add(destroyable1e);
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
@@ -465,6 +479,13 @@ public class TTS2016 extends BasicGameState {
                 //g.draw(e.hitbox);
         }
         }
+        for(Destroyable1 d : desks) {
+            if(d.isvisible){
+               d.currentImage.draw(d.x,d.y);
+               g.draw(d.hitbox);
+            }
+        }
+        
         //stormy.currentImage.draw(stormy.x, stormy.y);
         //daniel.currentImage.draw(daniel.x, daniel.y);
 
@@ -472,7 +493,9 @@ public class TTS2016 extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
             throws SlickException {
-
+        if(Player.counter>3){
+                    sbg.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                }
         counter += delta;
 
         Input input = gc.getInput();
@@ -597,7 +620,7 @@ public class TTS2016 extends BasicGameState {
                 if (w.isvisible) {
                     w.isvisible = false;
                     makevisible();
-                    sbg.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                    
 
                 }
 
@@ -626,6 +649,18 @@ public class TTS2016 extends BasicGameState {
                     s.isvisible = false;
                 }
 
+            }
+        }
+         for (Destroyable1 d : desks) {
+
+            if (Player.rect.intersects(d.hitbox)) {
+                //System.out.println("yay");
+                if (d.isvisible) {
+
+                    Player.counter += 1;
+                    d.isvisible = false;
+                    
+                }
             }
         }
 
