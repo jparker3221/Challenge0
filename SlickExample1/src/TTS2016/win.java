@@ -157,7 +157,14 @@ public class win extends BasicGameState {
                 //item.isvisible = true;
                 //item1.isvisible = true;
                 Itemwin.isvisible = true;
-                //Destroyable1.isvisible = true;
+                TTS2016.candy1.isvisible = true;
+                TTS2016.candy2.isvisible = true;
+                TTS2016.destroyable1a.isvisible = true;
+                TTS2016.destroyable1b.isvisible = true;
+                TTS2016.destroyable1c.isvisible = true;
+                TTS2016.destroyable1d.isvisible = true;
+                TTS2016.destroyable1e.isvisible = true;
+                
                 game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 
 

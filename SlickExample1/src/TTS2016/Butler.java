@@ -5,24 +5,18 @@
  */
 package TTS2016;
 
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
+
 /**
  *
  * @author jparker3221
  */
-    import org.newdawn.slick.Animation;
-
-import org.newdawn.slick.SlickException;
-
-import org.newdawn.slick.SpriteSheet;
-
-import org.newdawn.slick.geom.Rectangle;
-
-import org.newdawn.slick.geom.Shape;
-
-
-public class Enemy {
-
-
+public class Butler {
+    
     private static int numberOfEnemies = 0;
 
     private int id;
@@ -101,7 +95,7 @@ public class Enemy {
     Direction mydirection;
 
 
-    Enemy(int a, int b) throws SlickException {
+    Butler(int a, int b) throws SlickException {
 
 
         Bx = a;
@@ -129,7 +123,7 @@ public class Enemy {
         this.mydirection = Direction.WAIT;
 
 
-        SpriteSheet skeletonSS = new SpriteSheet("res/MaidSpriteSheet.png",
+        SpriteSheet skeletonSS = new SpriteSheet("res/ButlerSpriteSheet.png",
                 64, 64, 0);
 
         skup = new Animation();
@@ -585,5 +579,4 @@ public class Enemy {
 
 
 }
-
 

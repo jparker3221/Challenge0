@@ -112,11 +112,14 @@ public class TTS2016 extends BasicGameState {
     public Item healthpotion, healthpotion1;
     public Item1 speedpotion, speedpotion1;
     public Itemwin antidote;
-    public Candy candy1, candy2;
-    public Soda soda1, soda2;
-    public Enemy flava, flav;
-    public Destroyable1 destroyable1a, destroyable1b, destroyable1c,
+    public static Candy candy1, candy2;
+    public static Soda soda1, soda2;
+    public Maid Mary, Esperanza;
+    public Butler Thomas, Alfred;
+    public static Destroyable1 destroyable1a, destroyable1b, destroyable1c,
             destroyable1d, destroyable1e;
+    public static Destroyable2 destroyable2a, destroyable2b, destroyable2c,
+            destroyable2d, destroyable2e;
 
     public ArrayList<Item> stuff = new ArrayList();
 
@@ -128,9 +131,13 @@ public class TTS2016 extends BasicGameState {
 
     public ArrayList<Soda> Sodashop = new ArrayList();
 
-    public ArrayList<Enemy> bonez = new ArrayList();
+    public ArrayList<Maid> brushes = new ArrayList();
+    
+    public ArrayList<Butler> platters = new ArrayList();
     
     public ArrayList<Destroyable1> desks = new ArrayList();
+    
+    public ArrayList<Destroyable2> tables = new ArrayList();
 
     private boolean[][] hostiles;
 
@@ -387,22 +394,36 @@ public class TTS2016 extends BasicGameState {
         soda2 = new Soda(900, 325);
         Sodashop.add(soda1);
         Sodashop.add(soda2);
-        flava = new Enemy(3000, 1280);
-        flav = new Enemy(1864, 256);
-        bonez.add(flava);
-        bonez.add(flav);
+        Mary = new Maid(3000, 1280);
+        Esperanza = new Maid(1864, 256);
+        Thomas = new Butler(2050,1000);
+        Alfred = new Butler(1050,2000);
+        brushes.add(Mary);
+        brushes.add(Esperanza);
+        platters.add(Thomas);
+        platters.add(Alfred);
         antidote = new Itemwin(3004, 92);
         stuffwin.add(antidote);
         destroyable1a = new Destroyable1(256,256);
         destroyable1b = new Destroyable1(256,128);
         destroyable1c = new Destroyable1(128,256);
         destroyable1d = new Destroyable1(64,64);
-        destroyable1e = new Destroyable1(1028,256);
+        destroyable1e = new Destroyable1(1096,256);
         desks.add(destroyable1a);
         desks.add(destroyable1b);
         desks.add(destroyable1c);
         desks.add(destroyable1d);
         desks.add(destroyable1e);
+        destroyable2a = new Destroyable2(512,512);
+        destroyable2b = new Destroyable2(512,256);
+        destroyable2c = new Destroyable2(256,512);
+        destroyable2d = new Destroyable2(128,128);
+        destroyable2e = new Destroyable2(1099,512);
+        tables.add(destroyable2a);
+        tables.add(destroyable2b);
+        tables.add(destroyable2c);
+        tables.add(destroyable2d);
+        tables.add(destroyable2e);
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g)
@@ -460,7 +481,7 @@ public class TTS2016 extends BasicGameState {
             if (n.isvisible) {
                 n.currentImage.draw(n.x, n.y);
                 // draw the hitbox
-                g.draw(n.hitbox);
+                //g.draw(n.hitbox);
 
             }
         }
@@ -468,24 +489,37 @@ public class TTS2016 extends BasicGameState {
             if (s.isvisible) {
                 s.currentImage.draw(s.x, s.y);
                 // draw the hitbox
-                g.draw(s.hitbox);
+                //g.draw(s.hitbox);
 
             }
         }
-        for (Enemy e : bonez) {
+        for (Maid e : brushes) {
              if (e.isAlive) {
                 e.currentanime.draw(e.Bx, e.By);
                 // draw the hitbox
                 //g.draw(e.hitbox);
         }
         }
-        for(Destroyable1 d : desks) {
-            if(d.isvisible){
-               d.currentImage.draw(d.x,d.y);
-               g.draw(d.hitbox);
+        for (Butler e : platters) {
+             if (e.isAlive) {
+                e.currentanime.draw(e.Bx, e.By);
+                // draw the hitbox
+                //g.draw(e.hitbox);
+        }
+        }
+        for(Destroyable1 d1 : desks) {
+            if(d1.isvisible){
+               d1.currentImage.draw(d1.x,d1.y);
+               //g.draw(d1.hitbox);
             }
         }
         
+        for(Destroyable2 d2 : tables){
+            if (d2.isvisible){
+                d2.currentImage.draw(d2.x,d2.y);
+                //g.draw(d2.hitbox);
+            }
+        }
         //stormy.currentImage.draw(stormy.x, stormy.y);
         //daniel.currentImage.draw(daniel.x, daniel.y);
 
@@ -493,7 +527,7 @@ public class TTS2016 extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta)
             throws SlickException {
-        if(Player.counter>3){
+        if(Player.counter>5){
                     sbg.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 }
         counter += delta;
@@ -627,12 +661,23 @@ public class TTS2016 extends BasicGameState {
             }
         }
         
-        for(Enemy e : bonez){
+        for(Maid e : brushes){
             if (Player.rect.intersects(e.rect)) {
                 //System.out.println("yay");
                 {
 
                     Player.health -= 5000;
+                    
+                }
+
+            }
+        }
+        for(Butler e : platters){
+            if (Player.rect.intersects(e.rect)) {
+                //System.out.println("yay");
+                {
+
+                    Player.speed -= .01f;
                     
                 }
 
@@ -663,9 +708,22 @@ public class TTS2016 extends BasicGameState {
                 }
             }
         }
+        for (Destroyable2 d : tables) {
+
+            if (Player.rect.intersects(d.hitbox)) {
+                //System.out.println("yay");
+                if (d.isvisible) {
+
+                    Player.counter += 1;
+                    d.isvisible = false;
+                    
+                }
+            }
+        }
+         
 
         Player.health -= counter / 1000;
-        if (Player.health <= 0) {
+        if (Player.health <= 0||Player.speed <= 0f) {
             makevisible();
             sbg.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
         }
