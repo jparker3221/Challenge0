@@ -131,9 +131,9 @@ public class TTS2016 extends BasicGameState {
 
     public ArrayList<Soda> Sodashop = new ArrayList();
 
-    public ArrayList<Maid> brushes = new ArrayList();
+    public static ArrayList<Maid> brushes = new ArrayList();
     
-    public ArrayList<Butler> platters = new ArrayList();
+    public static ArrayList<Butler> platters = new ArrayList();
     
     public ArrayList<Destroyable1> desks = new ArrayList();
     
@@ -378,18 +378,18 @@ public class TTS2016 extends BasicGameState {
             }
         }
 
-        healthpotion = new Item(100, 100);
-        healthpotion1 = new Item(450, 400);
+       // healthpotion = new Item(100, 100);
+        //healthpotion1 = new Item(450, 400);
         candy1 = new Candy(800, 500);
         candy2 = new Candy(204, 750);
-        stuff.add(healthpotion);
-        stuff.add(healthpotion1);
+        //stuff.add(healthpotion);
+        //stuff.add(healthpotion1);
         Candyshop.add(candy1);
         Candyshop.add(candy2);
-        speedpotion = new Item1(100, 150);
-        speedpotion1 = new Item1(450, 100);
-        stuff1.add(speedpotion);
-        stuff1.add(speedpotion1);
+        //speedpotion = new Item1(100, 150);
+        //speedpotion1 = new Item1(450, 100);
+        //stuff1.add(speedpotion);
+        //stuff1.add(speedpotion1);
         soda1 = new Soda(1000, 400);
         soda2 = new Soda(900, 325);
         Sodashop.add(soda1);
@@ -402,8 +402,8 @@ public class TTS2016 extends BasicGameState {
         brushes.add(Esperanza);
         platters.add(Thomas);
         platters.add(Alfred);
-        antidote = new Itemwin(3004, 92);
-        stuffwin.add(antidote);
+        //antidote = new Itemwin(3004, 92);
+       // stuffwin.add(antidote);
         destroyable1a = new Destroyable1(256,256);
         destroyable1b = new Destroyable1(256,128);
         destroyable1c = new Destroyable1(128,256);
@@ -451,7 +451,7 @@ public class TTS2016 extends BasicGameState {
         g.drawString("time passed: " + counter / 1000, camera.cameraX + 600, camera.cameraY);
         // moveenemies();
 
-        for (Item i : stuff) {
+        /*for (Item i : stuff) {
             if (i.isvisible) {
                 i.currentImage.draw(i.x, i.y);
                 // draw the hitbox
@@ -477,6 +477,7 @@ public class TTS2016 extends BasicGameState {
 
             }
         }
+*/
         for (Candy n : Candyshop) {
             if (n.isvisible) {
                 n.currentImage.draw(n.x, n.y);
@@ -609,18 +610,18 @@ public class TTS2016 extends BasicGameState {
         Player.rect.setLocation(Player.getplayershitboxX(),
                 Player.getplayershitboxY());
 
-        for (Item i : stuff) {
+        /*for (Item i : stuff) {
 
             if (Player.rect.intersects(i.hitbox)) {
                 //System.out.println("yay");
                 if (i.isvisible) {
 
-                    Player.health += 10000;
+                    Player.health += 100000;
                     i.isvisible = false;
                 }
 
             }
-        }
+        }*/
         for (Candy n : Candyshop) {
 
             if (Player.rect.intersects(n.hitbox)) {
@@ -634,7 +635,7 @@ public class TTS2016 extends BasicGameState {
             }
         }
 
-        for (Item1 h : stuff1) {
+       /* for (Item1 h : stuff1) {
 
             if (Player.rect.intersects(h.hitbox)) {
                 //System.out.println("yay");
@@ -660,24 +661,37 @@ public class TTS2016 extends BasicGameState {
 
             }
         }
+        */
+        for (Maid m : brushes) {
+            if (Math.abs(Player.x - m.Bx) < 256){
+                m.move();
+            }
+        }
         
         for(Maid e : brushes){
             if (Player.rect.intersects(e.rect)) {
                 //System.out.println("yay");
                 {
 
-                    Player.health -= 5000;
+                    Player.health -= 50;
                     
                 }
 
             }
         }
+        
+        for (Butler b : platters){
+            if (Math.abs(Player.x - b.Bx) < 256){
+                b.move();
+            }
+        }
+        
         for(Butler e : platters){
             if (Player.rect.intersects(e.rect)) {
                 //System.out.println("yay");
                 {
 
-                    Player.speed -= .01f;
+                    Player.speed -= .005f;
                     
                 }
 
@@ -758,5 +772,15 @@ public class TTS2016 extends BasicGameState {
 
         // this could make a better kludge
     }
+    
+    public static void moveEnemies() throws SlickException{
+        for(Maid m : brushes){
+            m.move();
+         }
+        for(Butler b : platters){
+            b.move();
+        }
+    }
+    
 
 }

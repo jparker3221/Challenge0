@@ -159,6 +159,8 @@ public class win extends BasicGameState {
                 Itemwin.isvisible = true;
                 TTS2016.candy1.isvisible = true;
                 TTS2016.candy2.isvisible = true;
+                TTS2016.soda1.isvisible = true;
+                TTS2016.soda2.isvisible = true;
                 TTS2016.destroyable1a.isvisible = true;
                 TTS2016.destroyable1b.isvisible = true;
                 TTS2016.destroyable1c.isvisible = true;
