@@ -21,7 +21,7 @@ public class Candy {
 	Image currentImage;
 	Shape hitbox;
 	Image candy = new Image(
-			"res/Candy.png");
+			"res/teddy_bear.png");
 
 	Candy(int a, int b) throws SlickException {
 		this.x = a;

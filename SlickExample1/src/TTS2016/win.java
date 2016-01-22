@@ -92,7 +92,7 @@ public class win extends BasicGameState {
         g.setColor(Color.white);
 
 
-        g.drawString("You destroyed the house!", 380, 200);
+        g.drawString("You got your toys!!", 380, 200);
         g.drawString("press 1 to play again", 400, 320);
 
 

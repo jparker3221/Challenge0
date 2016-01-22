@@ -21,7 +21,7 @@ public class Soda {
     Image currentImage;
     Shape hitbox;
     Image soda = new Image(
-            "res/candy.png");
+            "res/car.png");
 
     Soda(int a, int b) throws SlickException {
         this.x = a;

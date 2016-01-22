@@ -180,7 +180,7 @@ public class TTS2016 extends BasicGameState {
 		// *******************
         // Scenerey Stuff
         // ****************
-        grassMap = new TiledMap("res/d4.tmx");
+        grassMap = new TiledMap("res/Mansion.tmx");
 
         // Ongoing checks are useful
         System.out.println("Tile map is this wide: " + grassMap.getWidth());
@@ -544,6 +544,7 @@ public class TTS2016 extends BasicGameState {
         // System.out.println("Right limit: " + rightlimit);
         float projectedright = Player.x + fdelta + SIZE;
 
+                   
         boolean cangoright = projectedright < rightlimit;
 
         // there are two types of fixes. A kludge and a hack. This is a kludge.
