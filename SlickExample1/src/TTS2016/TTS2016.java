@@ -120,6 +120,7 @@ public class TTS2016 extends BasicGameState {
             destroyable1d, destroyable1e;
     public static Destroyable2 destroyable2a, destroyable2b, destroyable2c,
             destroyable2d, destroyable2e;
+    public orb magic8ball;
 
     public ArrayList<Item> stuff = new ArrayList();
 
@@ -377,8 +378,8 @@ public class TTS2016 extends BasicGameState {
                 }
             }
         }
-
-       // healthpotion = new Item(100, 100);
+        magic8ball = new orb((int)Player.x + 16, (int)Player.x + 16); 
+        // healthpotion = new Item(100, 100);
         //healthpotion1 = new Item(450, 400);
         candy1 = new Candy(800, 500);
         candy2 = new Candy(204, 750);
@@ -521,6 +522,10 @@ public class TTS2016 extends BasicGameState {
                 //g.draw(d2.hitbox);
             }
         }
+        
+        if(magic8ball.isIsVisible()){
+            magic8ball.orbpic.draw(magic8ball.getLocationX(),magic8ball.getLocationY());
+        }
         //stormy.currentImage.draw(stormy.x, stormy.y);
         //daniel.currentImage.draw(daniel.x, daniel.y);
 
@@ -606,6 +611,11 @@ public class TTS2016 extends BasicGameState {
             } // else { System.out.println("Right limit reached: " +
             // rightlimit);}
 
+        }else if (input.isKeyDown(input.KEY_SPACE)){
+            magic8ball.setIsVisible(true);
+            magic8ball.setLocationX((int)Player.x+16);
+            magic8ball.setLocationY((int)Player.y-16);
+           
         }
 
         Player.rect.setLocation(Player.getplayershitboxX(),
