@@ -1,5 +1,5 @@
 
-package arraychallenge;
+//package arraychallenge;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,12 +8,21 @@ import java.util.Scanner;
 public class ArrayChallenge {
 
     public static int x, y, nx, ny, maxX, maxY, score, counter;
+    public static int health = 100;
     static String dinput;
     static String direction;
     static Scanner sc = new Scanner(System.in);
     public static boolean game, enemy1, enemy2, enemy3, stun, stun1, stun2, stun3;
     public static int cooldown;
-
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
     public static void main(String[] args) {
         game = true;
         enemy1 = true;
@@ -37,7 +46,7 @@ public class ArrayChallenge {
             x = (int) Math.floor(Math.random() * maxX);
             y = (int) Math.floor(Math.random() * maxY);
         }
-        for (int t = 0; t < 50; t++) {
+        for (int t = 0; t < 15; t++) {
             int trapx = (int) Math.floor(Math.random() * maxX);
             int trapy = (int) Math.floor(Math.random() * maxY);
             trap[trapx][trapy] = true;
@@ -55,7 +64,9 @@ public class ArrayChallenge {
         }
         nx = x;
         ny = y;
+        System.out.println("You have spilled all your coins! but enemies are trying to take it! protect your wealth!");
         System.out.println("Traps: ○, Enemies: ☢, Treasure: ◎" + "\n" + "Collect 10 points to win.");
+        grid(map, trap, treasure, enemy);
         while (game) {
             input(map, trap, treasure, enemy);
             enemies(map, trap, treasure, enemy);
@@ -65,7 +76,18 @@ public class ArrayChallenge {
             }
             clear(map);
             if (score == 10) {
-                System.out.println("YOU WIN! gg wp");
+                System.out.println("You won!!!!!");
+                System.out.println(ANSI_YELLOW+"░░░░░░░▐█▀█▄░░░░░░░░░░▄█▀█▌ ");
+                System.out.println("░░░░░░░█▐▓░█▄░░░░░░░▄█▀▄▓▐█ ");
+                System.out.println("░░░░░░░█▐▓▓░████▄▄▄█▀▄▓▓▓▌█ ");
+                System.out.println("░░░░░▄█▌▀▄▓▓▄▄▄▄▀▀▀▄▓▓▓▓▓▌█ ");
+                System.out.println("░░░▄█▀▀▄▓█▓▓▓▓▓▓▓▓▓▓▓▓▀░▓▌█ ");
+                System.out.println("░░█▀▄▓▓▓███▓▓▓███▓▓▓▄░░▄▓▐█▌");
+                System.out.println("░█▌▓▓▓▀▀▓▓▓▓███▓▓▓▓▓▓▓▄▀▓▓▐█ ");
+                System.out.println("▐█▐██▐░▄▓▓▓▓▓▀▄░▀▓▓▓▓▓▓▓▓▓▌█▌ ");
+                System.out.println("█▌███▓▓▓▓▓▓▓▓▐░░▄▓▓███▓▓▓▄▀▐█ ");
+                System.out.println("█▐█▓▀░░▀▓▓▓▓▓▓▓▓▓██████▓▓▓▓▐█▌ ");
+                System.out.println("▓▄▌▀░▀░▐▀█▄▓▓██████████▓▓▓▌█"+ANSI_RESET);
                 game = false;
             }
         }
@@ -75,46 +97,52 @@ public class ArrayChallenge {
     } // end of main
 
     public static void grid(String[][] map, boolean[][] trap, boolean[][] treasure, int[][] enemy) {
+        if (game) {
+            map[y][x] = ANSI_PURPLE+"●"+ANSI_RESET;
+        } else {
+            System.out.println("Game over");
+            System.out.println("  __           _     _               _                       ");
+            System.out.println(" / _| ___  ___| |___| |__   __ _  __| |_ __ ___   __ _ _ __  ");
+            System.out.println("| |_ / _ \\/ _ \\ / __| '_ \\ / _` |/ _` | '_ ` _ \\ / _` | '_ \\ ");
+            System.out.println("|  _|  __/  __/ \\__ \\ |_) | (_| | (_| | | | | | | (_| | | | |");
+            System.out.println("|_|  \\___|\\___|_|___/_.__/ \\__,_|\\__,_|_| |_| |_|\\__,_|_| |_|");
+            
+        }
 
         for (int i = 0; i <= map[0].length - 1; i++) {
             for (int j = 0; j <= map[1].length - 1; j++) {
                 if (trap[j][i]
-                        && map[i][j] != "^^" && map[i][j] != "vv" && map[i][j] != ">>" && map[i][j] != "<<"
-                        && map[i][j] != "\\" && map[i][j] != "//") {
-                    map[i][j] = "○";
+                        && map[i][j] != ANSI_CYAN + "^^" +ANSI_RESET && map[i][j] != ANSI_CYAN + "vv"+ANSI_RESET && map[i][j] != ANSI_CYAN + ">>"+ANSI_RESET && map[i][j] != ANSI_CYAN + "<<"+ANSI_RESET
+                        && map[i][j] != ANSI_CYAN + "\\" +ANSI_RESET&& map[i][j] != ANSI_CYAN + "//"+ANSI_RESET) {
+                    map[i][j] = ANSI_RED+"○"+ANSI_RESET;
                 }
-//                if (enemy[0][0] == j && enemy[0][1] == i
-//                        || enemy[1][0] == j && enemy[1][1] == i
-//                        || enemy[2][0] == j && enemy[2][1] == i) {
-//                    map[i][j] = "XK";
-//                }
                 if (treasure[j][i]) {
-                    map[i][j] = "◎";
+                    map[i][j] = ANSI_WHITE+"◎"+ANSI_RESET;
                 }
                 if (trap[j][i] && treasure[j][i]) {
                     trap[j][i] = false;
                 }
 
                 if (j < map[1].length - 1) {
-                    if (map[i][j] != "●" && map[i][j] != "○" && map[i][j] != "◎" && map[i][j] != "☢"
-                            && map[i][j] != "^^" && map[i][j] != "vv" && map[i][j] != ">>" && map[i][j] != "<<"
-                            && map[i][j] != "\\" && map[i][j] != "//" && map[i][j] != "**") {
-                        System.out.print("-");
+                    if (map[i][j] != ANSI_PURPLE+"●"+ANSI_RESET && map[i][j] != ANSI_RED+"○"+ANSI_RESET && map[i][j] != ANSI_WHITE+"◎"+ANSI_RESET && map[i][j] != ANSI_GREEN+"☢"+ANSI_RESET
+                            && map[i][j] != ANSI_CYAN + "^^"+ANSI_RESET && map[i][j] != ANSI_CYAN + "vv"+ANSI_RESET && map[i][j] !=ANSI_CYAN +  ">>"+ANSI_RESET && map[i][j] != ANSI_CYAN + "<<"+ANSI_RESET
+                            && map[i][j] != ANSI_CYAN + "\\"+ANSI_RESET && map[i][j] != ANSI_CYAN + "//"+ANSI_RESET && map[i][j] != "**") {
+                        System.out.print(ANSI_BLACK+"-"+ANSI_RESET);
                     } else {
                         System.out.print(map[i][j]);
                     }
 
-                } else if (map[i][j] != "●" && map[i][j] != "○" && map[i][j] != "◎" && map[i][j] != "☢"
-                        && map[i][j] != "^^" && map[i][j] != "vv" && map[i][j] != ">>" && map[i][j] != "<<"
-                        && map[i][j] != "\\" && map[i][j] != "//" && map[i][j] != "**") {
-                    System.out.println("-");
+                } else if (map[i][j] != ANSI_PURPLE+"●"+ANSI_RESET && map[i][j] != ANSI_RED+"○"+ANSI_RESET && map[i][j] != ANSI_WHITE+"◎"+ANSI_RESET && map[i][j] != ANSI_GREEN+"☢"+ANSI_RESET
+                        && map[i][j] != ANSI_CYAN + "^^"+ANSI_RESET && map[i][j] != ANSI_CYAN + "vv"+ANSI_RESET && map[i][j] != ANSI_CYAN + ">>"+ANSI_RESET && map[i][j] != ANSI_CYAN + "<<"+ANSI_RESET
+                        && map[i][j] != ANSI_CYAN + "\\" +ANSI_RESET&& map[i][j] != ANSI_CYAN + "//" +ANSI_RESET&& map[i][j] != "**") {
+                    System.out.println(ANSI_BLACK+"-"+ANSI_RESET);
                 } else {
                     System.out.println(map[i][j]);
                 }
             }
         }
 
-    } //end of grid
+    } 
 
     public static void enemies(String[][] map, boolean[][] trap, boolean[][] treasure, int[][] enemy) {
         if (enemy[0][0] > x && !stun1 && enemy1) {
@@ -175,25 +203,34 @@ public class ArrayChallenge {
             stun3 = true;
         }
         if (enemy1) {
-            map[enemy[0][1]][enemy[0][0]] = "☢";
+            map[enemy[0][1]][enemy[0][0]] = ANSI_GREEN+"☢"+ANSI_RESET;
         } else if (!enemy1) {
-            map[enemy[0][1]][enemy[0][0]] = "-";
+            map[enemy[0][1]][enemy[0][0]] = ANSI_BLACK+"-"+ANSI_RESET;
         }
         if (enemy2) {
-            map[enemy[1][1]][enemy[1][0]] = "☢";
+            map[enemy[1][1]][enemy[1][0]] = ANSI_GREEN+"☢"+ANSI_RESET;
         } else if (!enemy2) {
-            map[enemy[1][1]][enemy[1][0]] = "-";
+            map[enemy[1][1]][enemy[1][0]] = ANSI_BLACK+"-"+ANSI_RESET;
         }
         if (enemy3) {
-            map[enemy[2][1]][enemy[2][0]] = "☢";
+            map[enemy[2][1]][enemy[2][0]] = ANSI_GREEN+"☢"+ANSI_RESET;
         } else if (!enemy3) {
-            map[enemy[2][1]][enemy[2][0]] = "-";
+            map[enemy[2][1]][enemy[2][0]] = ANSI_BLACK+"-"+ANSI_RESET;
         }
 
         if (enemy[0][1] == y && enemy[0][0] == x && enemy1
                 || enemy[1][1] == y && enemy[1][0] == x && enemy2
                 || enemy[2][1] == y && enemy[2][0] == x && enemy3) {
+            health= health - 50;
+            if(health == 0){
             game = false;
+            }
+            for (int e = 0; e < 2; e++) {
+            int enemyx = (int) Math.floor(Math.random() * maxX);
+            int enemyy = (int) Math.floor(Math.random() * maxY);
+            enemy[e][1] = enemyx;
+            enemy[e][0] = enemyy;
+            }
         }
 
         if (trap[enemy[0][1]][enemy[0][0]]) {
@@ -213,7 +250,10 @@ public class ArrayChallenge {
         nx += movex;
         ny += movey;
         if (trap[nx][ny]) {
+            health= health -15;
+            if(health == 0){
             game = false;
+            }
         }
         if (treasure[nx][ny]) {
             map[nx][ny] = "-";
@@ -227,66 +267,67 @@ public class ArrayChallenge {
     public static void clear(String[][] map) {
         for (int i = 0; i <= map[0].length - 1; i++) {
             for (int j = 0; j <= map[1].length - 1; j++) {
-                if (map[i][j] == "^^" || map[i][j] == "vv" || map[i][j] == ">>" || map[i][j] == "<<"
-                        || map[i][j] == "\\" || map[i][j] == "//") {
+                if (map[i][j] == ANSI_CYAN + "^^"+ANSI_RESET || map[i][j] == ANSI_CYAN + "vv" +ANSI_RESET|| map[i][j] == ANSI_CYAN + ">>"+ANSI_RESET || map[i][j] == ANSI_CYAN + "<<"+ANSI_RESET
+                        || map[i][j] == ANSI_CYAN + "\\"+ANSI_RESET || map[i][j] == ANSI_CYAN + "//"+ANSI_RESET) {
                     map[i][j] = "-";
                 }
-                if (map[i][j] == "**" && counter == 3) {
-                    map[i][j] = "-";
-                    stun = false;
-                    stun1 = false;
-                    stun2 = false;
-                    stun3 = false;
-                }
+//                if (map[i][j] == "**" && counter == 3) {
+//                    map[i][j] = "-";
+//                    stun = false;
+//                    stun1 = false;
+//                    stun2 = false;
+//                    stun3 = false;
+//                }
             }
         }
     }
 
     public static void input(String[][] map, boolean[][] trap, boolean[][] treasure, int[][] enemy) {
-        System.out.print("Enter direction (W, A, S, D or diagonals), F to attack, G to stun, your score is " + score + ": ");
+        System.out.print("Enter direction (N, E, S, W or diagonals), F to attack, G to stun;");
+                System.out.print("your score is " + score + ", your health is " + health + ": ");
         dinput = sc.nextLine();
 
-        if (dinput.equalsIgnoreCase("w") && y != maxX - 1) {
+        if (dinput.equalsIgnoreCase("n") && y != maxX - 1) {
             move(map, 0, -1, trap, treasure, enemy);
-            direction = "w";
-        } else if (dinput.equalsIgnoreCase("d") && x != maxX - 1) {
+            direction = "n";
+        } else if (dinput.equalsIgnoreCase("e") && x != maxX - 1) {
             move(map, 1, 0, trap, treasure, enemy);
-            direction = "d";
+            direction = "e";
         } else if (dinput.equalsIgnoreCase("s") && y != maxX - 1) {
             move(map, 0, 1, trap, treasure, enemy);
             direction = "s";
-        } else if (dinput.equalsIgnoreCase("a") && x != 0) {
+        } else if (dinput.equalsIgnoreCase("w") && x != 0) {
             move(map, -1, 0, trap, treasure, enemy);
-            direction = "a";
-        } else if (dinput.equalsIgnoreCase("wd") && y != 0 && x != maxX - 1 || dinput.equalsIgnoreCase("dw") && y != 0 && x != maxX - 1) {
+            direction = "w";
+        } else if (dinput.equalsIgnoreCase("ne") && y != 0 && x != maxX - 1 || dinput.equalsIgnoreCase("dw") && y != 0 && x != maxX - 1) {
             move(map, 1, -1, trap, treasure, enemy);
-            direction = "wd";
-        } else if (dinput.equalsIgnoreCase("wa") && y != 0 && x != 0 || dinput.equalsIgnoreCase("aw") && y != 0 && x != 0) {
+            direction = "ne";
+        } else if (dinput.equalsIgnoreCase("nw") && y != 0 && x != 0 || dinput.equalsIgnoreCase("aw") && y != 0 && x != 0) {
             move(map, -1, -1, trap, treasure, enemy);
-            direction = "wa";
-        } else if (dinput.equalsIgnoreCase("sd") && y != maxX - 1 && x != maxX - 1 || dinput.equalsIgnoreCase("ds") && y != maxX - 1 && x != maxX - 1) {
+            direction = "nw";
+        } else if (dinput.equalsIgnoreCase("se") && y != maxX - 1 && x != maxX - 1 || dinput.equalsIgnoreCase("ds") && y != maxX - 1 && x != maxX - 1) {
             move(map, 1, 1, trap, treasure, enemy);
-            direction = "sd";
-        } else if (dinput.equalsIgnoreCase("sa") && y != maxX - 1 && x != 0 || dinput.equalsIgnoreCase("as") && y != maxX - 1 && x != 0) {
+            direction = "se";
+        } else if (dinput.equalsIgnoreCase("sw") && y != maxX - 1 && x != 0 || dinput.equalsIgnoreCase("as") && y != maxX - 1 && x != 0) {
             move(map, -1, 1, trap, treasure, enemy);
-            direction = "sa";
+            direction = "sw";
         } else if (dinput.equalsIgnoreCase("f") && direction == "w") {
-            map[y - 1][x] = "^^";
+            map[y - 1][x] = ANSI_CYAN + "^^"+ANSI_RESET;
             trap[y - 1][x] = true;
         } else if (dinput.equalsIgnoreCase("f") && direction == "s") {
-            map[y + 1][x] = "vv";
+            map[y + 1][x] = ANSI_CYAN + "vv"+ANSI_RESET;
             trap[y + 1][x] = true;
         } else if (dinput.equalsIgnoreCase("f") && direction == "d") {
-            map[y][x + 1] = ">>";
+            map[y][x + 1] = ANSI_CYAN + ">>"+ANSI_RESET;
             trap[y][x + 1] = true;
         } else if (dinput.equalsIgnoreCase("f") && direction == "a") {
-            map[y][x - 1] = "<<";
+            map[y][x - 1] = ANSI_CYAN + "<<"+ANSI_RESET;
             trap[y][x - 1] = true;
         } else if (dinput.equalsIgnoreCase("f") && direction == "wd") {
-            map[y - 1][x + 1] = "//";
+            map[y - 1][x + 1] = ANSI_CYAN + "//"+ANSI_RESET;
             trap[y - 1][x + 1] = true;
         } else if (dinput.equalsIgnoreCase("f") && direction == "wa") {
-            map[y - 1][x - 1] = "\\";
+            map[y - 1][x - 1] = ANSI_CYAN + "\\"+ANSI_RESET;
             trap[y - 1][x - 1] = true;
         } else if (dinput.equalsIgnoreCase("f") && direction == "sd") {
             map[y + 1][x + 1] = "\\";
@@ -295,11 +336,10 @@ public class ArrayChallenge {
             map[y + 1][x - 1] = "//";
             trap[y + 1][x - 1] = true;
         } else if (dinput.equalsIgnoreCase("g") && cooldown >= 5){ {
-//            stun = true;
-            
+          
                 cooldown = 0;
                 if(y > enemy[0][0]){
-                enemy[0][0] = enemy[0][0] - 4;
+                    enemy[0][0] = enemy[0][0] - 4;
                 }
                 if(y < enemy[0][0]){
                     enemy[0][0] = enemy[0][0] + 4;
@@ -309,157 +349,37 @@ public class ArrayChallenge {
                 }
                 if(x < enemy[0][1]){
                     enemy[0][1] = enemy[0][1] + 4;
+                if(y > enemy[1][0]){
+                    enemy[1][0] = enemy[1][0] - 4;
+                }
+                if(y < enemy[1][0]){
+                    enemy[1][0] = enemy[1][0] + 4;
+                }
+                if(x > enemy[1][1]){
+                    enemy[1][1] = enemy[1][1] - 4;
+                }
+                if(x < enemy[1][1]){
+                    enemy[1][1] = enemy[1][1] + 4;
+                if(y > enemy[2][0]){
+                    enemy[2][0] = enemy[2][0] - 4;
+                }
+                if(y < enemy[2][0]){
+                    enemy[2][0] = enemy[2][0] + 4;
+                }
+                if(x > enemy[2][1]){
+                    enemy[2][1] = enemy[2][1] - 4;
+                }
+                if(x < enemy[2][1]){
+                    enemy[2][1] = enemy[2][1] + 4;
                 
         } else {
             System.out.println("Sorry, wrong input or reached map edge");
             input(map, trap, treasure, enemy);
         }
-        if (game) {
-            map[y][x] = "●";
-        } else {
-            System.out.println("Game over");
-        }
-    } //end of input
-}
-    }
-}
-/**
- *
- * @author josephjarzombek
- */
-/*public class ArrayChallenge {
-static String whichWay;
-static Random random = new Random();
-public static int Yblocked;
-public static int Xblocked;
-static int Y = 4;
-static int X = 4;
-static int e1Y = 2;
-static int e1X = 2;
-static int cooldown = 15;
-static boolean isAlive = true;
-    public static void main(String[] args) {
-        game();
-    }
-    public static void game(){
-        /*
-	int[][] numbers=new int[10][10];       
-	for(int row=0;row<numbers.length;row++){
-	for(int col=0;col<numbers[row].length;col++){
-	numbers[row][col]=1+col;
-	}
-	}
-	for(int row=0;row<numbers.length;row++){
-	for(int col=0;col<numbers[row].length;col++){
-	System.out.print(" x");
-	}
-	System.out.println();
-	}
-	}
-         */  
-/*
-        System.out.println("Type go to begin");
-        while(isAlive == true){
-                Scanner movement = new Scanner(System.in);
-                whichWay = movement.nextLine();
-                                if(Y > e1Y){
-                    e1Y = e1Y + 1;
-                }
-                if(Y < e1Y){
-                    e1Y = e1Y - 1;
-                }
-                if(X > e1X){
-                    e1X = e1X + 1;
-                }
-                if(X < e1X){
-                    e1X = e1X - 1;
-                }
-                
-               if(whichWay.contains("n")){
-                    Y = Y - 1;
-                        if(Y == Yblocked && X == Xblocked){
-                        Y = Y + 1;
-                    }
-                }
-                if(whichWay.contains("s")){
-                    Y = Y + 1;
-                    if(Y == 6 && X==6){
-                    Y = Y - 1;
-                    }
-                }
-                if(whichWay.contains("w")){
-                    X = X - 1;
-                    if(X == 6 && Y == 6){
-                    X = X +1;
-                    }
-                }
-                if(whichWay.contains("e")){
-                    X = X + 1;
-                    if(X == 6 && Y == 6){
-                    X = X -1;
-                    }
-                }
-                if(whichWay.contains("ult") && cooldown >= 5){
-                cooldown = 0;
-                if(Y > e1Y){
-                e1Y = e1Y - 4;
-                }
-                if(Y < e1Y){
-                    e1Y = e1Y + 4;
-                }
-                if(X > e1X){
-                    e1X = e1X - 4;
-                }
-                if(X < e1X){
-                    e1X = e1X + 4;
-                }
-        }
-                     
-                                
-            char[][] map;           
-            map = new char[8][8];
-            map[Y][X] = '●';
-            map[2][2] = '◎';
-            map[e1Y][e1X] = '☢';
-            for(int w = 0; w <= 10; w++){
-            walls();
-            map[Yblocked][Xblocked] = '○';
-            }
-            for (int i = 0; i <= map[0].length - 1; i++) {
-                for (int j = 0; j <= map[1].length - 1; j++) {
-                    if (j < map[1].length - 1) {
-                        if (map[i][j] != '●' && map[i][j] != '◎' && map[i][j] != '☢' && map[i][j] != '○') {
-                            System.out.print("-");
-                        } else {
-                        System.out.print(map[i][j]);
-                    }
-                } else {
-                    if (map[i][j] != '●' && map[i][j] != '☢') {
-                        System.out.println("-");
-                    } else {
-                        System.out.println(map[i][j]);
-                    }
-                }
-            }
-        }
-                    cooldown = cooldown + 1;
-                    if(X == 2 && Y == 2){
-                    System.out.println("You Got the Treasure. Joo Wheen.");
-                    isAlive = false;
-                } 
-                    if(e1X == X && e1Y == Y){
-                        System.out.println("You got caught");
-                        isAlive = false;
-                    }
-                    if(X == 4 && Y == 8){
-                    System.out.println("You activated my trap card. U R DED");
-                    isAlive = false;
-           } 
-        }
-    }
-    public static void walls(){
-        Xblocked=random.nextInt(1);
-        Yblocked=random.nextInt(1);
         
+    } 
+}
     }
-}*/
+}
+    }
+}
