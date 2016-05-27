@@ -9,7 +9,7 @@ package parker_7_arraygame;
  *
  * @author jparker3221
  */
-public class Enemy { //here I have my enemy class with different values I utilize in my main class 5 pts
+public class Enemy { 
 
     int x = 0;
     int y = 0;

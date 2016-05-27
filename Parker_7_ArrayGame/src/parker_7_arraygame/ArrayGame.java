@@ -26,8 +26,8 @@ public class ArrayGame {
     static String playercoords;
     static String trap1;
     static String trap2;
-    static Enemy[] enemies = {e1, e2}; //this is my array for tracking enemies in my first level 5 pts
-    static Enemy[] enemies2 = {e3, e4, e5, e6}; //This is where I add additional enemies to make my second level harder 5 pts
+    static Enemy[] enemies = {e1, e2}; 
+    static Enemy[] enemies2 = {e3, e4, e5, e6}; 
     static BossEnemy[] bossenemies2 = {be2, be3};
     static BossEnemy[] bossenemies = {be1};
     static Treasure[] chests = {t1, t2, t3};
@@ -49,7 +49,7 @@ public class ArrayGame {
     static int event = rand1.nextInt(10) + 1;
     static int moves = 0;
     static boolean canFreeze = true;
-    public static final String ANSI_RESET = "\u001B[0m"; //Color yayyyyyyyy!!!
+    public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
@@ -63,12 +63,7 @@ public class ArrayGame {
         uses = 3;
         moves = 0;
         System.out.println("\n\n\n\n");
-        System.out.println(" __       ___________    ____  _______  __          __               __   __    __  .__   __.   _______  __       _______ \n"
-                + "|  |     |   ____\\   \\  /   / |   ____||  |        /_ |  _          |  | |  |  |  | |  \\ |  |  /  _____||  |     |   ____|\n"
-                + "|  |     |  |__   \\   \\/   /  |  |__   |  |         | | (_)         |  | |  |  |  | |   \\|  | |  |  __  |  |     |  |__   \n"
-                + "|  |     |   __|   \\      /   |   __|  |  |         | |       .--.  |  | |  |  |  | |  . `  | |  | |_ | |  |     |   __|  \n"
-                + "|  `----.|  |____   \\    /    |  |____ |  `----.    | |  _    |  `--'  | |  `--'  | |  |\\   | |  |__| | |  `----.|  |____ \n"
-                + "|_______||_______|   \\__/     |_______||_______|    |_| (_)    \\______/   \\______/  |__| \\__|  \\______| |_______||_______|");
+        System.out.println("Level 1");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
@@ -79,21 +74,16 @@ public class ArrayGame {
         randomize();
         play = true;
         while (play) {
-            //System.out.println("me");
-            if (moves == event) {   //I have set up event to be a random number, 1 to 11. If the number of player moves equals the random int, the player cant use the freeze skill. There is also ascii art with it 10 pts
-                System.out.println("It is a hot, hot day.");
-                System.out.println("  _                                                                                                      \n"
-                        + " |_ ._ _   _  _   _     _. |_  o | o _|_       _| o  _  _. |_  |  _   _|   _|_ |_  o  _   _|_     ._ ._  \n"
-                        + " |  | (/_ (/_ /_ (/_   (_| |_) | | |  |_ \\/   (_| | _> (_| |_) | (/_ (_|    |_ | | | _>    |_ |_| |  | | \n"
-                        + "                                         /                                                               ");
+            
+            if (moves == event) {   
+                System.out.println("You lost your time stop, for the stars are not alligned");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ArrayGame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+                canFreeze = false;
             }
-            //System.out.println("i");
 
             assignSymbols();
 
@@ -126,7 +116,7 @@ public class ArrayGame {
                 }
             }
             enemyMove = true;
-            
+            canFreeze = true;
             checkIfMovingOn(playercoords, trap1, trap2);
             clearMap();
             level1Pass = valid;
@@ -137,12 +127,7 @@ public class ArrayGame {
         uses = 3;
         moves = 0;
         System.out.println("\n\n\n\n");
-        System.out.println(" __       ___________    ____  _______  __          ___         .______    _______     ___       ______  __    __ \n"
-                + "|  |     |   ____\\   \\  /   / |   ____||  |        |__ \\   _    |   _  \\  |   ____|   /   \\     /      ||  |  |  |\n"
-                + "|  |     |  |__   \\   \\/   /  |  |__   |  |           ) | (_)   |  |_)  | |  |__     /  ^  \\   |  ,----'|  |__|  |\n"
-                + "|  |     |   __|   \\      /   |   __|  |  |          / /        |   _  <  |   __|   /  /_\\  \\  |  |     |   __   |\n"
-                + "|  `----.|  |____   \\    /    |  |____ |  `----.    / /_   _    |  |_)  | |  |____ /  _____  \\ |  `----.|  |  |  |\n"
-                + "|_______||_______|   \\__/     |_______||_______|   |____| (_)   |______/  |_______/__/     \\__\\ \\______||__|  |__|");
+        System.out.println("Level 2");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
@@ -154,17 +139,13 @@ public class ArrayGame {
         play = true;
         while (play) {
             if (moves == event) {
-                System.out.println("It is a hot, hot day.");
-                System.out.println("  _                                                                                                      \n"
-                        + " |_ ._ _   _  _   _     _. |_  o | o _|_       _| o  _  _. |_  |  _   _|   _|_ |_  o  _   _|_     ._ ._  \n"
-                        + " |  | (/_ (/_ /_ (/_   (_| |_) | | |  |_ \\/   (_| | _> (_| |_) | (/_ (_|    |_ | | | _>    |_ |_| |  | | \n"
-                        + "                                         /                                                               ");
+                System.out.println("You lost your time stop, for the stars are not alligned");
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ArrayGame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+                canFreeze = false;
             }
 
             assignSymbols2();
@@ -197,46 +178,44 @@ public class ArrayGame {
                 }
             }
             enemyMove = true;
-            
+            canFreeze = true;
             clearMap();
             level1Pass = valid;
         }
-    } // This is my second level, making multiple levels possible 10 pts
+    } 
 
     static void go() {
         playagain = true;
-        System.out.println(".______    __  .______        ___   .___________. _______     ___________    ____  ___       _______   _______ \n" //This is the start of my story, which has had lots of thought put into it. THere are also multiple sequences of ascii art throughout the game 5 pts
-                + "|   _  \\  |  | |   _  \\      /   \\  |           ||   ____|   |   ____\\   \\  /   / /   \\     |       \\ |   ____|\n"
-                + "|  |_)  | |  | |  |_)  |    /  ^  \\ `---|  |----`|  |__      |  |__   \\   \\/   / /  ^  \\    |  .--.  ||  |__   \n"
-                + "|   ___/  |  | |      /    /  /_\\  \\    |  |     |   __|     |   __|   \\      / /  /_\\  \\   |  |  |  ||   __|  \n"
-                + "|  |      |  | |  |\\  \\--./  _____  \\   |  |     |  |____    |  |____   \\    / /  _____  \\  |  '--'  ||  |____ \n"
-                + "| _|      |__| | _| `.___/__/     \\__\\  |__|     |_______|   |_______|   \\__/ /__/     \\__\\ |_______/ |_______|");
+        System.out.println("  ____ _          _        __  __             _       \n" +
+" / ___(_)_ __ ___| | ___  |  \\/  | __ _ _ __ (_) __ _ \n" +
+"| |   | | '__/ __| |/ _ \\ | |\\/| |/ _` | '_ \\| |/ _` |\n" +
+"| |___| | | | (__| |  __/ | |  | | (_| | | | | | (_| |\n" +
+" \\____|_|_|  \\___|_|\\___| |_|  |_|\\__,_|_| |_|_|\\__,_|");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(ArrayGame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Here is a game I like to call Pirate Evade. \n Basically, You are being chased around by pirates (noted by P), and Pirate Captains (C) who are out "
-                + "for \n your head. However, if you get 100 points in both scenarios (jungle and beach) before they get you, you \n will win. You might also want to watch out for traps (*) \n"
-                + "Pirates move once per turn. Captains move twice. Collect treasure chests (T) and trick enemies into traps to get points.");
+        System.out.println("You have spilled all your coins! but enemies are trying to take it! protect your wealth!");
+        System.out.println("Traps: ○, Enemies: ☢, Bosses: 0, Treasure: ◎" + "\n" + "Collect 10 points to win.");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Logger.getLogger(ArrayGame.class.getName()).log(Level.SEVERE, null, ex);
         }
         while (playagain) {
-            //System.out.println("me");
+            
             level1();
             if (level1Pass) {
-                //System.out.println("over here");
+                
                 level2();
             }
-            //System.out.println("other me");
+            
             playAgain();
         }
     }
 
-    static boolean checkIfOver(String b /*playercoords*/, String c/*trap1*/, String d/*trap2*/) {
+    static boolean checkIfOver(String b, String c, String d) {
         if ((b.equals(c)) || (b.equals(d))) {
             System.out.println("Thats a trap dummy!");
             System.out.println(". . . . . . . . . . . . . . . . _,,,--~~~~~~~~--,_ \n"
@@ -394,9 +373,9 @@ public class ArrayGame {
         for (Enemy enemie : enemies) {
             if (enemie.isAlive && enemyMove) {
                 map[enemie.x][enemie.y] ='-';
-                if (enemie.x < player.x && !checkWalls(enemie.x + 1, enemie.y)) { //checkWalls makes sure that there aren't walls that the enemies can just go through 5 pts
+                if (enemie.x < player.x && !checkWalls(enemie.x + 1, enemie.y)) { 
                     enemie.x += 1;
-                } else if (checkWalls(enemie.x + 1, enemie.y) && !checkWalls(enemie.x + 1, enemie.y + 1)) { //This checks to see if the enemy can go around the wall, avoiding it 5 pts
+                } else if (checkWalls(enemie.x + 1, enemie.y) && !checkWalls(enemie.x + 1, enemie.y + 1)) { 
                     enemie.x += 1;
                     enemie.y += 1;
                 } else if (enemie.x > player.x && !checkWalls(enemie.x - 1, enemie.y)) {
@@ -446,7 +425,7 @@ public class ArrayGame {
         for (Enemy enemie : enemies) {
             if (enemie.isAlive) {
                 if (a.equals(enemie.coordinates)) {
-                    System.out.println("You got roughed up by a pirate.");
+                    System.out.println("You got roughed up by a circle.");
                     System.out.println("Game over");
             System.out.println("  __           _     _               _                       ");
             System.out.println(" / _| ___  ___| |___| |__   __ _  __| |_ __ ___   __ _ _ __  ");
@@ -470,7 +449,7 @@ public class ArrayGame {
         for (BossEnemy bossenemie : bossenemies) {
             if (bossenemie.isAlive) {
                 if (a.equals(bossenemie.coordinates)) {
-                    System.out.println("You got roughed up by a pirate captain.");
+                    System.out.println("You got roughed up by a boss circle.");
                     System.out.println("Game over");
             System.out.println("  __           _     _               _                       ");
             System.out.println(" / _| ___  ___| |___| |__   __ _  __| |_ __ ___   __ _ _ __  ");
@@ -496,7 +475,7 @@ public class ArrayGame {
         trap1x = rand1.nextInt(39) + 1;
         trap1y = rand1.nextInt(39) + 1;
         for (int i = 0; i < enemies.length; i++) {
-            enemies[i] = new Enemy(true, rand1.nextInt(39) + 1, rand1.nextInt(39) + 1, 'P');
+            enemies[i] = new Enemy(true, rand1.nextInt(39) + 1, rand1.nextInt(39) + 1, '☢');
         }
         for (int i = 0; i < bossenemies.length; i++) {
             bossenemies[i] = new BossEnemy(true, rand1.nextInt(39) + 1, rand1.nextInt(39) + 1, '0', 2, 100);
@@ -531,18 +510,18 @@ public class ArrayGame {
             for (int j = 0; j <= map[1].length - 1; j++) {
                 if (i == 0 || j == 0 || i == 40 || j == 40) {
                     map[i][j] = '#';
-                } else if (i % 5 == 0 && j % 5 == 0 && map[i][j] != '@') { // This draws walls every 5x5 units, systematically 5 pts
+                } else if (i % 5 == 0 && j % 5 == 0 && map[i][j] != '@') { 
                     map[i][j] = 'X';
                 }
-                if (j < map[1].length - 1 /*&& (j < 10 + player.y || j > player.x - 10) && (i < 10 + player.x || i > player.y - 10)*/) {
-                    if (map[i][j] != player.symbol && map[i][j] != '*' && map[i][j] != 'P' && map[i][j] != 'T' && map[i][j] != '#' && map[i][j] != '0' && map[i][j] != 'X') {
+                if (j < map[1].length - 1 ) {
+                    if (map[i][j] != player.symbol && map[i][j] != '*' && map[i][j] != '☢' && map[i][j] != 'T' && map[i][j] != '#' && map[i][j] != '0' && map[i][j] != 'X') {
                         System.out.print(". ");
                     } else if (map[i][j] == '#'){
                         System.out.print(ANSI_GREEN + map[i][i] + ANSI_RESET + " ");
                     }else {
                         System.out.print(map[i][j] + " ");
                     }
-                } else if (map[i][j] != player.symbol && map[i][j] != '#'/*&& (j < 10 + player.y || j > player.x - 10) && (i < 10 + player.x || i > player.y - 10)*/) {
+                } else if (map[i][j] != player.symbol && map[i][j] != '#') {
                     System.out.println("-");
                 } else {
                     System.out.println(map[i][j] + " ");
@@ -578,7 +557,7 @@ public class ArrayGame {
 
     static void playerLevelCheck() {
         if (player.score >= 20) {
-            player.level = player.score / 60;
+            player.level = player.score / 20;
         } else {
             player.level = 1;
         }
@@ -596,12 +575,12 @@ public class ArrayGame {
             player.symbol = '@';
         }
         player.speed = player.level;
-    } //This is my player's level updater. It gives different symbols for each level, each level having a range of points associated with it 10 pts
+    } 
 
     static void movePlayer() {
         
 
-        System.out.println("Where do you want to move? (N/E/S/W/NE/NW/SE/SW) Or type Q to quit");
+        System.out.println("Where do you want to move? (N/E/S/W/NE/NW/SE/SW) Or type Q to quit or P to push ("+uses+"push left)");
         direction = scan.next();
         if (direction.toUpperCase().contains("N")) {
             map[player.x][player.y] = '-';
@@ -636,6 +615,9 @@ public class ArrayGame {
         }
         if (direction.toUpperCase().contains("I")) {
             player.score += 100;
+        }
+        if (direction.toUpperCase().contains("P")){
+            playerSkill();
         }
 
         
@@ -761,7 +743,7 @@ public class ArrayGame {
         for (Enemy enemie : enemies2) {
             if (enemie.isAlive) {
                 if (a.equals(enemie.coordinates)) {
-                    System.out.println("You got roughed up by a pirate.");
+                    System.out.println("You got roughed up by a circle.");
                     System.out.println("Game over");
             System.out.println("  __           _     _               _                       ");
             System.out.println(" / _| ___  ___| |___| |__   __ _  __| |_ __ ___   __ _ _ __  ");
@@ -785,7 +767,7 @@ public class ArrayGame {
         for (BossEnemy bossenemie : bossenemies2) {
             if (bossenemie.isAlive) {
                 if (a.equals(bossenemie.coordinates)) {
-                    System.out.println("You got roughed up by a pirate captain.");
+                    System.out.println("You got roughed up by a boss circle.");
                     System.out.println("Game over");
             System.out.println("  __           _     _               _                       ");
             System.out.println(" / _| ___  ___| |___| |__   __ _  __| |_ __ ___   __ _ _ __  ");
@@ -857,7 +839,7 @@ public class ArrayGame {
         trap1x = rand1.nextInt(39) + 1;
         trap1y = rand1.nextInt(39) + 1;
         for (int i = 0; i < enemies2.length; i++) {
-            enemies2[i] = new Enemy(true, rand1.nextInt(39) + 1, rand1.nextInt(39) + 1, 'P');
+            enemies2[i] = new Enemy(true, rand1.nextInt(39) + 1, rand1.nextInt(39) + 1, '☢');
         }
         for (int i = 0; i < bossenemies2.length; i++) {
             bossenemies2[i] = new BossEnemy(true, rand1.nextInt(39) + 1, rand1.nextInt(39) + 1, '0', 2, 100);
@@ -885,6 +867,16 @@ public class ArrayGame {
         }
         return false;
     }
+    static void playerSkill() { 
+        if (uses >= 1 && canFreeze) {
+            enemyMove = false;
+            System.out.println("Enemies frozen this round");
+            uses -= 1;
+
+        } else {
+            System.out.println("You can't freeze this turn");
+        }
+    }
 
     
     static void drawMap2() {
@@ -892,18 +884,18 @@ public class ArrayGame {
             for (int j = 0; j <= map[1].length - 1; j++) {
                 if (i == 0 || j == 0 || i == 40 || j == 40) {
                     map[i][j] = '~';
-                } else if (i % 5 == 0 && j % 5 == 0 && map[i][j] != '@') { // This draws walls every 5x5 units, systematically 5 pts
+                } else if (i % 5 == 0 && j % 5 == 0 && map[i][j] != '@') { 
                     map[i][j] = '○';
                 }
-                if (j < map[1].length - 1 /*&& (j < 10 + player.y || j > player.x - 10) && (i < 10 + player.x || i > player.y - 10)*/) {
-                    if (map[i][j] != player.symbol && map[i][j] != '*' && map[i][j] != 'P' && map[i][j] != 'T' && map[i][j] != '~' && map[i][j] != '0' && map[i][j] != 'X') {
+                if (j < map[1].length - 1 ) {
+                    if (map[i][j] != player.symbol && map[i][j] != '*' && map[i][j] != '☢' && map[i][j] != 'T' && map[i][j] != '~' && map[i][j] != '0' && map[i][j] != 'X') {
                         System.out.print(". ");
                     } else if (map[i][j] == '~'){
                         System.out.print(ANSI_YELLOW + map[i][i] + ANSI_RESET + " ");
                     }else {
                         System.out.print(map[i][j] + " ");
                     }
-                } else if (map[i][j] != player.symbol && map[i][j] != '~'/*&& (j < 10 + player.y || j > player.x - 10) && (i < 10 + player.x || i > player.y - 10)*/) {
+                } else if (map[i][j] != player.symbol && map[i][j] != '~') {
                     System.out.println(".");
                 } else {
                     System.out.println(map[i][j] + " ");

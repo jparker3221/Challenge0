@@ -9,8 +9,7 @@ package parker_7_arraygame;
  *
  * @author jparker3221
  */
-public class Player {//this is where I made player into an object, from a class constructor with different vairables determined in the main class 10 pts
-
+public class Player {
     int x = 0;
 	String name;
 	int y;
